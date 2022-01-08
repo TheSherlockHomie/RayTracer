@@ -3,40 +3,31 @@
 int main()
 {
     // Image Dimensions
-    const int image_width = 3;
-    const int image_height = 2;
+    const int image_width = 256;
+    const int image_height = 256;
 
     //Rendering the image
     std::cout << "P3\n"                                 //specify image is PPM
         << image_width << " " << image_height << "\n"   //specify image dimensions
         << "255\n";                                     //specify max colour
 
-    for (int i = 0; i < image_height; ++i) 
+    for (int j = image_height-1; j >= 0; --j) 
     {
-        for (int j = 0; j < image_width; ++j) 
+        for (int i = 0; i < image_width; ++i) 
         {
-            int r, g, b;
-            if (j == 0)
-            {
-                r = g = b = 0;
-            }
-            else if (j == 1)
-            {
-                r = 255;
-                g = b = 0;
-            }
-            else
-            {
-                r = g = 255;
-                b = 0;
-            }
+            double r, g, b;
+            
+            r = double(i) / (image_width - 1);
+            g = double(j) / (image_height - 1);
+            b = 0.25;
 
-            if (i != 0)
-            {
-                std::swap(r, b);
-            }
+            int ir, ig, ib;
+            
+            ir = static_cast<int>(255.999 * r);
+            ig = static_cast<int>(255.999 * g);
+            ib = static_cast<int>(255.999 * b);
 
-            std::cout << r << " " << g << " " << b << "\n";
+            std::cout << ir << " " << ig << " " << ib << "\n";
         }
     }
 }
