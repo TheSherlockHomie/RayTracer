@@ -1,5 +1,8 @@
 #include <iostream>
 
+#include "vec3.h"
+#include "color.h"
+
 int main()
 {
     // Image Dimensions
@@ -17,19 +20,9 @@ int main()
 
         for (int i = 0; i < image_width; ++i) 
         {
-            double r, g, b;
-            
-            r = double(i) / (image_width - 1);
-            g = double(j) / (image_height - 1);
-            b = 0.25;
+            color pixel_color(double(i) / (image_width - 1), double(j) / (image_height - 1), 0.25);
 
-            int ir, ig, ib;
-            
-            ir = static_cast<int>(255.999 * r);
-            ig = static_cast<int>(255.999 * g);
-            ib = static_cast<int>(255.999 * b);
-
-            std::cout << ir << " " << ig << " " << ib << "\n";
+            write_color(std::cout, pixel_color);
         }
     }
 
