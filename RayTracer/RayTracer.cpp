@@ -1,20 +1,42 @@
-// RayTracer.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Image Dimensions
+    const int image_width = 3;
+    const int image_height = 2;
+
+    //Rendering the image
+    std::cout << "P3\n"                                 //specify image is PPM
+        << image_width << " " << image_height << "\n"   //specify image dimensions
+        << "255\n";                                     //specify max colour
+
+    for (int i = 0; i < image_height; ++i) 
+    {
+        for (int j = 0; j < image_width; ++j) 
+        {
+            int r, g, b;
+            if (j == 0)
+            {
+                r = g = b = 0;
+            }
+            else if (j == 1)
+            {
+                r = 255;
+                g = b = 0;
+            }
+            else
+            {
+                r = g = 255;
+                b = 0;
+            }
+
+            if (i != 0)
+            {
+                std::swap(r, b);
+            }
+
+            std::cout << r << " " << g << " " << b << "\n";
+        }
+    }
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
